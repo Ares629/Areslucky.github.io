@@ -43,7 +43,12 @@
 
 
 
-<h1 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h1><h2 id="指针与数组："><a href="#指针与数组：" class="headerlink" title="指针与数组："></a>指针与数组：</h2><h3 id="指针与一维数组："><a href="#指针与一维数组：" class="headerlink" title="指针与一维数组："></a>指针与一维数组：</h3><h4 id="指针的初始化："><a href="#指针的初始化：" class="headerlink" title="指针的初始化："></a>指针的初始化：</h4><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//指向已有变量的地址：</span></span><br><span class="line"><span class="type">int</span> num = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> *ptr = &amp;num; <span class="comment">// 指向已有变量num的地址</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//指向数组元素：</span></span><br><span class="line"><span class="type">int</span> arr[<span class="number">5</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line"><span class="type">int</span> *ptr = arr; <span class="comment">// 指向数组arr的第一个元素</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//动态分配内存：</span></span><br><span class="line"><span class="type">int</span> *ptr = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>)); <span class="comment">// 动态分配一个int大小的内存空间，并将指针ptr指向该空间</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//指向空（NULL）：</span></span><br><span class="line"><span class="type">int</span> *ptr = <span class="literal">NULL</span>; <span class="comment">// 将指针ptr初始化为空指针</span></span><br></pre></td></tr></table></figure>
+<h1 id="指针"><a href="#指针" class="headerlink" title="指针:"></a>指针:</h1><p>大佬之作：<a href="https://blog.csdn.net/soonfly/article/details/51131141">让你不再害怕指针——C指针详解(经典,非常详细)_c语言指针-CSDN博客</a></p>
+<h2 id="指针基本类型："><a href="#指针基本类型：" class="headerlink" title="指针基本类型："></a>指针基本类型：</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> p; <span class="comment">//这是一个普通的整型变量</span></span><br><span class="line"><span class="type">int</span> *p; <span class="comment">//首先从P 处开始,先与*结合,所以说明P 是一个指针,然后再与int 结合,说明指针所指向的内容的类型为int 型.所以P是一个返回整型数据的指针</span></span><br><span class="line"><span class="type">int</span> p[<span class="number">3</span>]; <span class="comment">//首先从P 处开始,先与[]结合,说明P 是一个数组,然后与int 结合,说明数组里的元素是整型的,所以P 是一个由整型数据组成的数组</span></span><br><span class="line"><span class="type">int</span> *p[<span class="number">3</span>]; <span class="comment">//首先从P 处开始,先与[]结合,因为其优先级比*高,所以P 是一个数组,然后再与*结合,说明数组里的元素是指针类型,然后再与int 结合,说明指针所指向的内容的类型是整型的,所以P 是一个由返回整型数据的指针所组成的数组</span></span><br><span class="line"><span class="type">int</span> (*p)[<span class="number">3</span>]; <span class="comment">//首先从P 处开始,先与*结合,说明P 是一个指针然后再与[]结合(与&quot;()&quot;这步可以忽略,只是为了改变优先级),说明指针所指向的内容是一个数组,然后再与int 结合,说明数组里的元素是整型的.所以P 是一个指向由整型数据组成的数组的指针</span></span><br><span class="line"><span class="type">int</span> **p; <span class="comment">//首先从P 开始,先与*结合,说是P 是一个指针,然后再与*结合,说明指针所指向的元素是指针,然后再与int 结合,说明该指针所指向的元素是整型数据.由于二级指针以及更高级的指针极少用在复杂的类型中,所以后面更复杂的类型我们就不考虑多级指针了,最多只考虑一级指针.</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">p</span><span class="params">(<span class="type">int</span>)</span>; <span class="comment">//从P 处起,先与()结合,说明P 是一个函数,然后进入()里分析,说明该函数有一个整型变量的参数,然后再与外面的int 结合,说明函数的返回值是一个整型数据</span></span><br><span class="line"><span class="type">int</span> (*p)(<span class="type">int</span>); <span class="comment">//从P 处开始,先与指针结合,说明P 是一个指针,然后与()结合,说明指针指向的是一个函数,然后再与()里的int 结合,说明函数有一个int 型的参数,再与最外层的int 结合,说明函数的返回类型是整型,所以P 是一个指向有一个整型参数且返回类型为整型的函数的指针</span></span><br><span class="line"><span class="type">int</span> *(*p(<span class="type">int</span>))[<span class="number">3</span>]; <span class="comment">//可以先跳过,不看这个类型,过于复杂从P 开始,先与()结合,说明P 是一个函数,然后进入()里面,与int 结合,说明函数有一个整型变量参数,然后再与外面的*结合,说明函数返回的是一个指针,,然后到最外面一层,先与[]结合,说明返回的指针指向的是一个数组,然后再与*结合,说明数组里的元素是指针,然后再与int 结合,说明指针指向的内容是整型数据.所以P 是一个参数为一个整数据且返回一个指向由整型指针变量组成的数组的指针变量的函数.</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="指针与数组："><a href="#指针与数组：" class="headerlink" title="指针与数组："></a>指针与数组：</h2><h3 id="指针与一维数组："><a href="#指针与一维数组：" class="headerlink" title="指针与一维数组："></a>指针与一维数组：</h3><h4 id="指针的初始化："><a href="#指针的初始化：" class="headerlink" title="指针的初始化："></a>指针的初始化：</h4><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//指向已有变量的地址：</span></span><br><span class="line"><span class="type">int</span> num = <span class="number">10</span>;</span><br><span class="line"><span class="type">int</span> *ptr = &amp;num; <span class="comment">// 指向已有变量num的地址</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//指向数组元素：</span></span><br><span class="line"><span class="type">int</span> arr[<span class="number">5</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br><span class="line"><span class="type">int</span> *ptr = arr; <span class="comment">// 指向数组arr的第一个元素</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//动态分配内存：</span></span><br><span class="line"><span class="type">int</span> *ptr = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>)); <span class="comment">// 动态分配一个int大小的内存空间，并将指针ptr指向该空间</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//指向空（NULL）：</span></span><br><span class="line"><span class="type">int</span> *ptr = <span class="literal">NULL</span>; <span class="comment">// 将指针ptr初始化为空指针</span></span><br></pre></td></tr></table></figure>
 
 
 
@@ -100,6 +105,26 @@
       </tags>
   </entry>
   <entry>
+    <title>GCC编译与GDB调试</title>
+    <url>/2024/03/30/Gcc%E7%BC%96%E8%AF%91%E4%B8%8EGdb%E8%B0%83%E8%AF%95/</url>
+    <content><![CDATA[<h1 id="GCC编译与GDB调试"><a href="#GCC编译与GDB调试" class="headerlink" title="GCC编译与GDB调试"></a>GCC编译与GDB调试</h1><h2 id="一-gcc"><a href="#一-gcc" class="headerlink" title="一.gcc"></a>一.gcc</h2><h3 id="1-gcc简介："><a href="#1-gcc简介：" class="headerlink" title="1.gcc简介："></a>1.gcc简介：</h3><p>​	gcc命令使用GNU推出的基于C&#x2F;C++的编译器，是开放源代码领域应用最广泛的编译器，具有功能强大，编译代码支持性能优化等特点。</p>
+<p>​	gcc是GNU编译器套件（GNU Compiler Collection），它包括了C、C++、Objective-C、Fortran、Java、Ada、Go语言和D语言的前端，也包括了这些语言的库（如libstdc++、libgcj等等）。GCC的初衷是为GNU操作系统专门编写的一款编译器。GNU系统是彻底的自由软件。此处，“自由”的含义是它尊重用户的自由。</p>
+<h3 id="2-gcc编译链接过程"><a href="#2-gcc编译链接过程" class="headerlink" title="2.gcc编译链接过程"></a>2.gcc编译链接过程</h3><p>（1）预编译：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">`gcc -e main.c -o main.i <span class="comment">//-o选项用来指定输出文件的文件名 </span></span><br></pre></td></tr></table></figure>
+
+<p>（2）编译：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gcc -s main.i -o main.s</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">gcc test001.c test002.c -o test  <span class="comment">//将test001.c和test002.c分别编译后连接成test可执行文件</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>基于ESP-S3的智能手环</title>
     <url>/2024/03/28/%E5%9F%BA%E4%BA%8EESP-S3%E7%9A%84%E6%99%BA%E8%83%BD%E6%89%8B%E7%8E%AF/</url>
     <content><![CDATA[<h1 id="资料准备："><a href="#资料准备：" class="headerlink" title="资料准备："></a>资料准备：</h1><h4 id="SPI-LCD详解："><a href="#SPI-LCD详解：" class="headerlink" title="SPI LCD详解："></a>SPI LCD详解：</h4><p><a href="https://docs.espressif.com/projects/esp-iot-solution/zh_CN/latest/display/lcd/spi_lcd.html">SPI LCD 详解 - - — ESP-IoT-Solution latest 文档 (espressif.com)</a></p>
@@ -119,26 +144,6 @@
     <title>Hexo使用技巧</title>
     <url>/2024/03/29/Hexo%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</url>
     <content><![CDATA[]]></content>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>GCC编译与GDB调试</title>
-    <url>/2024/03/30/Gcc%E7%BC%96%E8%AF%91%E4%B8%8EGdb%E8%B0%83%E8%AF%95/</url>
-    <content><![CDATA[<h1 id="GCC编译与GDB调试"><a href="#GCC编译与GDB调试" class="headerlink" title="GCC编译与GDB调试"></a>GCC编译与GDB调试</h1><h2 id="一-gcc"><a href="#一-gcc" class="headerlink" title="一.gcc"></a>一.gcc</h2><h3 id="1-gcc简介："><a href="#1-gcc简介：" class="headerlink" title="1.gcc简介："></a>1.gcc简介：</h3><p>​	gcc命令使用GNU推出的基于C&#x2F;C++的编译器，是开放源代码领域应用最广泛的编译器，具有功能强大，编译代码支持性能优化等特点。</p>
-<p>​	gcc是GNU编译器套件（GNU Compiler Collection），它包括了C、C++、Objective-C、Fortran、Java、Ada、Go语言和D语言的前端，也包括了这些语言的库（如libstdc++、libgcj等等）。GCC的初衷是为GNU操作系统专门编写的一款编译器。GNU系统是彻底的自由软件。此处，“自由”的含义是它尊重用户的自由。</p>
-<h3 id="2-gcc编译链接过程"><a href="#2-gcc编译链接过程" class="headerlink" title="2.gcc编译链接过程"></a>2.gcc编译链接过程</h3><p>（1）预编译：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">`gcc -e main.c -o main.i <span class="comment">//-o选项用来指定输出文件的文件名 </span></span><br></pre></td></tr></table></figure>
-
-<p>（2）编译：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gcc -s main.i -o main.s</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">gcc test001.c test002.c -o test  <span class="comment">//将test001.c和test002.c分别编译后连接成test可执行文件</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
       <tags>
         <tag>Hexo</tag>
       </tags>
