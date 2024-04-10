@@ -1,21 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>GCC编译与GDB调试</title>
-    <url>/2024/03/30/Gcc%E7%BC%96%E8%AF%91%E4%B8%8EGdb%E8%B0%83%E8%AF%95/</url>
-    <content><![CDATA[<h1 id="GCC编译与GDB调试"><a href="#GCC编译与GDB调试" class="headerlink" title="GCC编译与GDB调试"></a>GCC编译与GDB调试</h1><h2 id="一-gcc"><a href="#一-gcc" class="headerlink" title="一.gcc"></a>一.gcc</h2><h3 id="1-gcc简介："><a href="#1-gcc简介：" class="headerlink" title="1.gcc简介："></a>1.gcc简介：</h3><p>​	gcc命令使用GNU推出的基于C&#x2F;C++的编译器，是开放源代码领域应用最广泛的编译器，具有功能强大，编译代码支持性能优化等特点。</p>
-<p>​	gcc是GNU编译器套件（GNU Compiler Collection），它包括了C、C++、Objective-C、Fortran、Java、Ada、Go语言和D语言的前端，也包括了这些语言的库（如libstdc++、libgcj等等）。GCC的初衷是为GNU操作系统专门编写的一款编译器。GNU系统是彻底的自由软件。此处，“自由”的含义是它尊重用户的自由。</p>
-<h3 id="2-gcc编译链接过程"><a href="#2-gcc编译链接过程" class="headerlink" title="2.gcc编译链接过程"></a>2.gcc编译链接过程</h3><p>（1）预编译：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">`gcc -e main.c -o main.i <span class="comment">//-o选项用来指定输出文件的文件名 </span></span><br></pre></td></tr></table></figure>
-
-<p>（2）编译：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gcc -s main.i -o main.s</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">gcc test001.c test002.c -o test  <span class="comment">//将test001.c和test002.c分别编译后连接成test可执行文件</span></span><br></pre></td></tr></table></figure>
-
-]]></content>
+    <title>Hexo使用技巧</title>
+    <url>/2024/03/29/Hexo%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[]]></content>
       <tags>
         <tag>Hexo</tag>
       </tags>
@@ -135,14 +123,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hexo使用技巧</title>
-    <url>/2024/03/29/Hexo%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[]]></content>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>基于ESP-S3的智能手环</title>
     <url>/2024/03/28/%E5%9F%BA%E4%BA%8EESP-S3%E7%9A%84%E6%99%BA%E8%83%BD%E6%89%8B%E7%8E%AF/</url>
     <content><![CDATA[<h1 id="资料准备："><a href="#资料准备：" class="headerlink" title="资料准备："></a>资料准备：</h1><h4 id="SPI-LCD详解："><a href="#SPI-LCD详解：" class="headerlink" title="SPI LCD详解："></a>SPI LCD详解：</h4><p><a href="https://docs.espressif.com/projects/esp-iot-solution/zh_CN/latest/display/lcd/spi_lcd.html">SPI LCD 详解 - - — ESP-IoT-Solution latest 文档 (espressif.com)</a></p>
@@ -160,6 +140,26 @@
 ]]></content>
       <tags>
         <tag>ESP-S3</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>GCC编译与GDB调试</title>
+    <url>/2024/03/30/Gcc%E7%BC%96%E8%AF%91%E4%B8%8EGdb%E8%B0%83%E8%AF%95/</url>
+    <content><![CDATA[<h1 id="GCC编译与GDB调试"><a href="#GCC编译与GDB调试" class="headerlink" title="GCC编译与GDB调试"></a>GCC编译与GDB调试</h1><h2 id="一-gcc"><a href="#一-gcc" class="headerlink" title="一.gcc"></a>一.gcc</h2><h3 id="1-gcc简介："><a href="#1-gcc简介：" class="headerlink" title="1.gcc简介："></a>1.gcc简介：</h3><p>​	gcc命令使用GNU推出的基于C&#x2F;C++的编译器，是开放源代码领域应用最广泛的编译器，具有功能强大，编译代码支持性能优化等特点。</p>
+<p>​	gcc是GNU编译器套件（GNU Compiler Collection），它包括了C、C++、Objective-C、Fortran、Java、Ada、Go语言和D语言的前端，也包括了这些语言的库（如libstdc++、libgcj等等）。GCC的初衷是为GNU操作系统专门编写的一款编译器。GNU系统是彻底的自由软件。此处，“自由”的含义是它尊重用户的自由。</p>
+<h3 id="2-gcc编译链接过程"><a href="#2-gcc编译链接过程" class="headerlink" title="2.gcc编译链接过程"></a>2.gcc编译链接过程</h3><p>（1）预编译：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">`gcc -e main.c -o main.i <span class="comment">//-o选项用来指定输出文件的文件名 </span></span><br></pre></td></tr></table></figure>
+
+<p>（2）编译：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gcc -s main.i -o main.s</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">gcc test001.c test002.c -o test  <span class="comment">//将test001.c和test002.c分别编译后连接成test可执行文件</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>Hexo</tag>
       </tags>
   </entry>
 </search>
