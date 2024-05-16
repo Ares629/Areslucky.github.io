@@ -13,6 +13,48 @@
       </tags>
   </entry>
   <entry>
+    <title>GCC编译与GDB调试</title>
+    <url>/2024/03/30/Gcc%E7%BC%96%E8%AF%91%E4%B8%8EGdb%E8%B0%83%E8%AF%95/</url>
+    <content><![CDATA[<h1 id="GCC编译与GDB调试"><a href="#GCC编译与GDB调试" class="headerlink" title="GCC编译与GDB调试"></a>GCC编译与GDB调试</h1><h2 id="一-gcc"><a href="#一-gcc" class="headerlink" title="一.gcc"></a>一.gcc</h2><h3 id="1-gcc简介："><a href="#1-gcc简介：" class="headerlink" title="1.gcc简介："></a>1.gcc简介：</h3><p>​	gcc命令使用GNU推出的基于C&#x2F;C++的编译器，是开放源代码领域应用最广泛的编译器，具有功能强大，编译代码支持性能优化等特点。</p>
+<p>​	gcc是GNU编译器套件（GNU Compiler Collection），它包括了C、C++、Objective-C、Fortran、Java、Ada、Go语言和D语言的前端，也包括了这些语言的库（如libstdc++、libgcj等等）。GCC的初衷是为GNU操作系统专门编写的一款编译器。GNU系统是彻底的自由软件。此处，“自由”的含义是它尊重用户的自由。</p>
+<h3 id="2-gcc编译链接过程"><a href="#2-gcc编译链接过程" class="headerlink" title="2.gcc编译链接过程"></a>2.gcc编译链接过程</h3><p>（1）预编译：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">`gcc -e main.c -o main.i <span class="comment">//-o选项用来指定输出文件的文件名 </span></span><br></pre></td></tr></table></figure>
+
+<p>（2）编译：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gcc -s main.i -o main.s</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">gcc test001.c test002.c -o test  <span class="comment">//将test001.c和test002.c分别编译后连接成test可执行文件</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LVGL基础知识</title>
+    <url>/2024/04/20/LVGL%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
+    <content><![CDATA[<h1 id="LVGL"><a href="#LVGL" class="headerlink" title="LVGL"></a>LVGL</h1><h1 id="English："><a href="#English：" class="headerlink" title="English："></a>English：</h1><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">pivot <span class="comment">//旋转</span></span><br><span class="line">rotation <span class="comment">//转动</span></span><br><span class="line">scale <span class="comment">//比例</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="创建对象框"><a href="#创建对象框" class="headerlink" title="创建对象框"></a>创建对象框</h4><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">demo_obj</span><span class="params">()</span>&#123;</span><br><span class="line">  <span class="comment">//得到当前活跃屏幕</span></span><br><span class="line">  <span class="type">lv_obj_t</span>* screen = lv_scr_act();</span><br><span class="line">  <span class="comment">//在当前屏幕显示一个对象</span></span><br><span class="line">  <span class="type">lv_obj_t</span>* obj = lv_obj_create(screen);</span><br><span class="line"></span><br><span class="line">  lv_obj_set_size(obj, <span class="number">100</span>, <span class="number">50</span>); <span class="comment">// 设置对象的大小为 100x50 像素</span></span><br><span class="line">  lv_obj_set_pos(obj, <span class="number">100</span>, <span class="number">0</span>); <span class="comment">// 默认左上角为原点, 设置对象位置</span></span><br><span class="line">  </span><br><span class="line">  lv_obj_set_style_bg_color(obj, lv_palette_main(LV_PALETTE_LIGHT_BLUE), <span class="number">0</span>);</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">demo_style</span><span class="params">()</span>&#123;</span><br><span class="line">  <span class="comment">//得到当前活跃屏幕</span></span><br><span class="line">  <span class="type">lv_obj_t</span>* screen = lv_scr_act();</span><br><span class="line">  <span class="comment">//在当前屏幕显示一个对象</span></span><br><span class="line">  <span class="type">lv_obj_t</span>* obj = lv_obj_create(screen);</span><br><span class="line"></span><br><span class="line">  <span class="comment">//通过样式修改对象</span></span><br><span class="line">  <span class="type">static</span> <span class="type">lv_style_t</span> style;</span><br><span class="line">  lv_style_init(&amp;style);</span><br><span class="line"></span><br><span class="line">  <span class="comment">//lv_style_set_width(&amp;style, 100);</span></span><br><span class="line">  <span class="comment">//lv_style_set_height(&amp;style, 100);</span></span><br><span class="line">  lv_style_set_size(&amp;style,<span class="number">100</span>); <span class="comment">//样式是个正方形</span></span><br><span class="line">  lv_style_set_radius(&amp;style, <span class="number">40</span>); <span class="comment">//样式的圆角</span></span><br><span class="line">  lv_style_set_x(&amp;style, <span class="number">50</span>);</span><br><span class="line">  lv_style_set_y(&amp;style, <span class="number">100</span>);</span><br><span class="line">  lv_style_set_pad_bottom(&amp;style, <span class="number">100</span>); <span class="comment">//使按钮文本与按钮边界之间有一个固定的空白区域</span></span><br><span class="line">  lv_style_set_bg_color(&amp;style, lv_palette_main(LV_PALETTE_LIGHT_BLUE));<span class="comment">//样式的颜色</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">//将样式与对象联系起来</span></span><br><span class="line">  lv_obj_add_style(obj, &amp;style, <span class="number">0</span>);</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">demo_label</span><span class="params">()</span>&#123;</span><br><span class="line">  <span class="type">lv_obj_t</span>* screen = lv_scr_act();<span class="comment">//获取当前活跃屏幕</span></span><br><span class="line">  <span class="type">lv_obj_t</span>* label = lv_label_create(screen);<span class="comment">//创建文本对象</span></span><br><span class="line"></span><br><span class="line">  lv_label_set_text(label, <span class="string">&quot;hello&quot;</span>);</span><br><span class="line">  lv_obj_align(label,LV_ALIGN_BOTTOM_MID,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">  lv_obj_set_style_text_color(label,lv_palette_main(LV_PALETTE_LIGHT_BLUE),<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="SquareLine-Studio"><a href="#SquareLine-Studio" class="headerlink" title="SquareLine Studio"></a>SquareLine Studio</h1><h2 id="screen"><a href="#screen" class="headerlink" title="screen:"></a>screen:</h2><p><img src="/2024/04/20/LVGL%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/LVGL%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86" alt="image-20240422165046286"></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">Flags:</span><br><span class="line">	Clickable <span class="comment">//可以被触摸</span></span><br><span class="line">    Checkable <span class="comment">//可以被切换</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="LABLE"><a href="#LABLE" class="headerlink" title="LABLE:"></a>LABLE:</h2><p><img src="/2024/04/20/LVGL%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/LVGL%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86" alt="image-20240422170853213"></p>
+]]></content>
+      <tags>
+        <tag>LVGL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>c语言基础知识</title>
     <url>/2024/04/01/C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
     <content><![CDATA[<h1 id="C语言基础知识"><a href="#C语言基础知识" class="headerlink" title="C语言基础知识"></a>C语言基础知识</h1><h2 id="volatile："><a href="#volatile：" class="headerlink" title="volatile："></a>volatile：</h2><p>​	在当前线程内，当读取一个变量时，为了提高读取速度编译器会先把变量读取到一个寄存器中，再读取变量时就会直接从寄存器读取，当变量在本次线程改变时，会把改变后的变量值copy到该寄存器中，保持一致，当变量因为别的线程值发生改变，寄存器的值不会相应的改变，从而照成程序读取的值和实际变量值不一样，<br>volatile的作用就是不将变量读取到寄存器中，或者说每一次读取都是从内存中读取变量值，牺牲了一定的效率，但提升了正确率。</p>
@@ -26,6 +68,9 @@
 
 <p>当我试图以此法用指针更改字符串，却收到了报错：”world”的类型是 const char *,说明它是只读的。</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//错误代码</span></span><br><span class="line"><span class="type">char</span> *ptr = <span class="string">&quot;world&quot;</span>;</span><br><span class="line">*ptr = <span class="string">&#x27;W&#x27;</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>,*ptr);</span><br><span class="line"><span class="comment">//在C语言中，字符串字面值（例如：&quot;world&quot;）在定义时会被编译器存储在常量区，这意味着它们是不可修改的字符常量。当你使用一个指针指向字符串字面值时，你实际上是让指针指向常量区中的字符串常量，因此试图修改这些字符串是非法的。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//正确代码</span></span><br><span class="line"><span class="type">char</span> str[] = <span class="string">&quot;world&quot;</span>;</span><br><span class="line">str[<span class="number">0</span>] = <span class="string">&#x27;W&#x27;</span>;</span><br><span class="line"><span class="comment">//这个数组会在栈上或堆上分配空间，并且将字符串内容复制到这个数组中。因此，现在你有一个可修改的字符数组，而不是指向字符串常量的指针。在这种情况下，你可以安全地修改数组中的字符，因为它们是可修改的。</span></span><br></pre></td></tr></table></figure>
+
+<p>如果用字符数组存储中文，因为中文占两个字节，需要连续输出两个字节才能显示一个中文。</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">	<span class="type">char</span> name[<span class="number">10</span>] = <span class="string">&quot;张永乐&quot;</span>;</span><br><span class="line">	<span class="type">char</span> name1[<span class="number">10</span>] = <span class="string">&quot;abcd&quot;</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%c%c&quot;</span>, name[<span class="number">2</span>], name[<span class="number">3</span>]);<span class="comment">//永</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%c%c&quot;</span>, name1[<span class="number">2</span>], name1[<span class="number">3</span>]);<span class="comment">//cd</span></span><br></pre></td></tr></table></figure>
 
 
 
@@ -134,29 +179,18 @@
       </tags>
   </entry>
   <entry>
-    <title>GCC编译与GDB调试</title>
-    <url>/2024/03/30/Gcc%E7%BC%96%E8%AF%91%E4%B8%8EGdb%E8%B0%83%E8%AF%95/</url>
-    <content><![CDATA[<h1 id="GCC编译与GDB调试"><a href="#GCC编译与GDB调试" class="headerlink" title="GCC编译与GDB调试"></a>GCC编译与GDB调试</h1><h2 id="一-gcc"><a href="#一-gcc" class="headerlink" title="一.gcc"></a>一.gcc</h2><h3 id="1-gcc简介："><a href="#1-gcc简介：" class="headerlink" title="1.gcc简介："></a>1.gcc简介：</h3><p>​	gcc命令使用GNU推出的基于C&#x2F;C++的编译器，是开放源代码领域应用最广泛的编译器，具有功能强大，编译代码支持性能优化等特点。</p>
-<p>​	gcc是GNU编译器套件（GNU Compiler Collection），它包括了C、C++、Objective-C、Fortran、Java、Ada、Go语言和D语言的前端，也包括了这些语言的库（如libstdc++、libgcj等等）。GCC的初衷是为GNU操作系统专门编写的一款编译器。GNU系统是彻底的自由软件。此处，“自由”的含义是它尊重用户的自由。</p>
-<h3 id="2-gcc编译链接过程"><a href="#2-gcc编译链接过程" class="headerlink" title="2.gcc编译链接过程"></a>2.gcc编译链接过程</h3><p>（1）预编译：</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">`gcc -e main.c -o main.i <span class="comment">//-o选项用来指定输出文件的文件名 </span></span><br></pre></td></tr></table></figure>
+    <title>Ubuntu</title>
+    <url>/2024/04/24/Ubuntu/</url>
+    <content><![CDATA[<h5 id="安装ubuntu时，安装界面不全："><a href="#安装ubuntu时，安装界面不全：" class="headerlink" title="安装ubuntu时，安装界面不全："></a>安装ubuntu时，安装界面不全：</h5><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">ctrl+alt+t <span class="comment">//打开终端</span></span><br><span class="line">: xrandr  <span class="comment">//查看分辨率</span></span><br><span class="line">: xrandr -s <span class="number">1920</span>x1080_59<span class="number">.96</span> <span class="comment">//选择分辨率</span></span><br></pre></td></tr></table></figure>
 
-<p>（2）编译：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gcc -s main.i -o main.s</span><br></pre></td></tr></table></figure>
+<h2 id="linux基础命令"><a href="#linux基础命令" class="headerlink" title="linux基础命令"></a>linux基础命令</h2><figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*安装c的时候，c依赖b，b又依赖a，这个时候会自动安装a和b</span></span><br><span class="line"><span class="comment">但是，如果c利用了b默认隐含a包的条件，直接调用了a中的api，而下次更新b包的时候，假如b不再依赖a，这个时候autoremove会删掉a包，使c包不可用。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">于是当你sudo apt-get remove c 后，autoremove会删除a,b.</span><br><span class="line">sudo apt-get autoremove <span class="comment">//卸载所有自动安装且不再使用的软件包</span></span><br></pre></td></tr></table></figure>
 
-
-
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">gcc test001.c test002.c -o test  <span class="comment">//将test001.c和test002.c分别编译后连接成test可执行文件</span></span><br></pre></td></tr></table></figure>
+<h2 id="vim-文本文档命令"><a href="#vim-文本文档命令" class="headerlink" title="vim &amp; 文本文档命令"></a>vim &amp; 文本文档命令</h2><h5 id="一般模式下的"><a href="#一般模式下的" class="headerlink" title="一般模式下的"></a>一般模式下的</h5><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ctrl + f //向下一页</span><br><span class="line">ctrl + d //向下半页</span><br><span class="line">+ //光标移动到非空格符的下一行，此时需要按住shift 和 =  输出 +</span><br><span class="line">ctrl + b //向上一页</span><br><span class="line">ctrl + u //向上半页</span><br><span class="line">- //光标移动到非空格符的上一行，只需要按住-</span><br><span class="line">n&lt;space&gt; //光标会向右移动这一行的 n 个字符，如果超出这一行的长度会停留在最后一个字符</span><br><span class="line">0 //光标移动到这一行的第一个字符</span><br><span class="line">$ //光标移动到这一行的最后一个字符</span><br><span class="line">H //光标移动到这个屏幕的一个字符</span><br><span class="line">L //光标移动到这个屏幕的最后一个字符</span><br><span class="line">G //光标移动到这个档案的最后</span><br><span class="line">nG //n 为数字。移动到这个档案的第 n 行。例如 20G 则会移动到这个档案的第 20 行(可配合 :set nu)</span><br><span class="line">gg //移动到这个档案的第一行</span><br><span class="line">n&lt;Enter&gt; //n 为数字。光标向下移动 n 行</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <tags>
-        <tag>Hexo</tag>
+        <tag>Linux</tag>
       </tags>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2024/04/20/LVGL%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
-    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>基于ESP-S3的智能手环</title>
@@ -175,9 +209,133 @@
 <h1 id="烧录"><a href="#烧录" class="headerlink" title="烧录"></a>烧录</h1><p>当使用 <code>UART0</code> 管脚下载固件时，需要满足以下接线条件：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">VDD     -&gt; 3V3</span><br><span class="line">GND     -&gt; GND   (与供电板“共地”)</span><br><span class="line">EN      -&gt; 拉高   (用于上电启动、不可浮空)</span><br><span class="line">GPIO0   -&gt; 拉低   (进入下载模式)</span><br><span class="line">GPIO46  -&gt; 拉低</span><br><span class="line">TXD0(GPIO43)    -&gt; RX</span><br><span class="line">RXD0(GPIO44)    -&gt; TX</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2024/03/28/%E5%9F%BA%E4%BA%8EESP-S3%E7%9A%84%E6%99%BA%E8%83%BD%E6%89%8B%E7%8E%AF/%E5%9F%BA%E4%BA%8EESP-S3%E7%9A%84%E6%99%BA%E8%83%BD%E6%89%8B%E7%8E%AF" alt="image-20240411154614214"></p>
+<p><img src="/2024/03/28/%E5%9F%BA%E4%BA%8EESP-S3%E7%9A%84%E6%99%BA%E8%83%BD%E6%89%8B%E7%8E%AF/%E5%9F%BA%E4%BA%8EESP-S3%E7%9A%84%E6%99%BA%E8%83%BD%E6%89%8B%E7%8E%AF" alt="KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK"></p>
 <h4 id="引脚"><a href="#引脚" class="headerlink" title="引脚"></a>引脚</h4><p>检测导通用万用表，红笔接地不动。</p>
 <p><img src="/2024/03/28/%E5%9F%BA%E4%BA%8EESP-S3%E7%9A%84%E6%99%BA%E8%83%BD%E6%89%8B%E7%8E%AF/%E5%9F%BA%E4%BA%8EESP-S3%E7%9A%84%E6%99%BA%E8%83%BD%E6%89%8B%E7%8E%AF" alt="image-20240411193142332"></p>
+<table>
+<thead>
+<tr>
+<th>FPC转接板</th>
+<th>引脚</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PIN_3</td>
+<td>3.3V</td>
+</tr>
+<tr>
+<td>PIN_4</td>
+<td>3.3V</td>
+</tr>
+<tr>
+<td>PIN_17</td>
+<td>3.3V</td>
+</tr>
+<tr>
+<td>PIN_1</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>PIN_2</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>PIN_5</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>PIN_6</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>PIN_18</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>PIN_12</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>7</td>
+<td>G9</td>
+</tr>
+<tr>
+<td>8</td>
+<td>G10</td>
+</tr>
+<tr>
+<td>9</td>
+<td>G11</td>
+</tr>
+<tr>
+<td>10</td>
+<td>G12</td>
+</tr>
+<tr>
+<td>11</td>
+<td>G13</td>
+</tr>
+<tr>
+<td>13</td>
+<td>G4</td>
+</tr>
+<tr>
+<td>14</td>
+<td>G5</td>
+</tr>
+<tr>
+<td>15</td>
+<td>G6</td>
+</tr>
+<tr>
+<td>16</td>
+<td>G7</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
 <h4 id="SPI屏幕驱动IDF-组件注册表-—-IDF-Component-Registry-espressif-com"><a href="#SPI屏幕驱动IDF-组件注册表-—-IDF-Component-Registry-espressif-com" class="headerlink" title="SPI屏幕驱动IDF 组件注册表 — IDF Component Registry (espressif.com)"></a>SPI屏幕驱动<a href="https://components.espressif.com/components/espressif/esp_lcd_ili9341">IDF 组件注册表 — IDF Component Registry (espressif.com)</a></h4><p><img src="/2024/03/28/%E5%9F%BA%E4%BA%8EESP-S3%E7%9A%84%E6%99%BA%E8%83%BD%E6%89%8B%E7%8E%AF/%E5%9F%BA%E4%BA%8EESP-S3%E7%9A%84%E6%99%BA%E8%83%BD%E6%89%8B%E7%8E%AF" alt="image-20240411193536757"></p>
 <p>3线spi和4线spi 的主要区别在于是否使用 D&#x2F;C 信号线。</p>
 <h1 id="屏幕驱动"><a href="#屏幕驱动" class="headerlink" title="屏幕驱动"></a>屏幕驱动</h1><p>在main文件夹下的CMakeList.txt中修改为</p>
@@ -198,6 +356,9 @@
 
 <h4 id="天气信息与lvgl交互"><a href="#天气信息与lvgl交互" class="headerlink" title="天气信息与lvgl交互"></a>天气信息与lvgl交互</h4><p>1.lvgl任务只能使用被完全解析的天气信息</p>
 <p>2.lvgl任务要在json数据被释放之前完成读取</p>
+<p>在ui.c中添加头文件</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//注释掉ui.c 中777-780行的代码</span></span><br><span class="line">sunday_Animation(ui_sun, <span class="number">0</span>);</span><br><span class="line">cloud_Animation(ui_cloud1, <span class="number">0</span>);</span><br><span class="line">cloud2_Animation(ui_cloud2, <span class="number">0</span>);</span><br><span class="line">cloud_Animation(ui_cloud3, <span class="number">0</span>);</span><br><span class="line"><span class="comment">//注释掉ui.c 中855行的代码</span></span><br><span class="line">sec_Animation(ui_Sec, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//////////////////////event_call//////////////////</span></span><br><span class="line"><span class="type">uint8_t</span> wodder_num = <span class="number">0</span>;</span><br><span class="line"><span class="type">char</span> wodder_str[<span class="number">10</span>];</span><br><span class="line"><span class="type">void</span> <span class="title function_">wodder_add</span><span class="params">(<span class="type">lv_event_t</span> *e)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(wodder_num &lt; <span class="number">20</span>)&#123;</span><br><span class="line">        wodder_num++;</span><br><span class="line">        <span class="built_in">snprintf</span>(wodder_str, <span class="keyword">sizeof</span>(wodder_str), <span class="string">&quot;%d&quot;</span>, wodder_num);</span><br><span class="line">        lv_label_set_text_fmt(ui_Label5, <span class="string">&quot;%s&quot;</span>, wodder_str);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        lv_label_set_text_fmt(ui_Label5, <span class="string">&quot;%s&quot;</span>, <span class="string">&quot;圆满&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">long</span> <span class="type">long</span> time_num = <span class="number">0</span>;</span><br><span class="line"><span class="type">long</span> <span class="type">long</span> water_time_long = <span class="number">0</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">water_call</span><span class="params">(<span class="type">lv_event_t</span> *e)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">int8_t</span> water_flag = <span class="number">0</span>;</span><br><span class="line">    <span class="type">static</span> <span class="type">int8_t</span> updata_num = <span class="number">1</span>;</span><br><span class="line">    <span class="type">static</span> <span class="type">int16_t</span> water_num_all = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int16_t</span> num = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//ESP_LOGI(TAG, &quot;饮水量1 %d&quot;, (int16_t)ui_Water_Chart_series_1_array[1]);</span></span><br><span class="line">    ESP_LOGI(TAG, <span class="string">&quot;flag %d&quot;</span>, water_flag);</span><br><span class="line">    <span class="keyword">if</span> (water_flag == <span class="number">0</span>)&#123;</span><br><span class="line">        lv_obj_clear_flag(ui_Panel3, LV_OBJ_FLAG_HIDDEN);</span><br><span class="line">        lv_obj_add_flag(ui_Panel4, LV_OBJ_FLAG_HIDDEN);</span><br><span class="line">        water_flag = <span class="number">1</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        lv_obj_clear_flag(ui_Panel4, LV_OBJ_FLAG_HIDDEN);</span><br><span class="line">        lv_obj_add_flag(ui_Panel3, LV_OBJ_FLAG_HIDDEN);</span><br><span class="line">        <span class="type">char</span> *text = lv_label_get_text(ui_Label6);</span><br><span class="line">        <span class="keyword">if</span>(*(text+<span class="number">2</span>) != <span class="string">&#x27;m&#x27;</span>)&#123;</span><br><span class="line">            num += (*(text+<span class="number">0</span>) - <span class="string">&#x27;0&#x27;</span>) * <span class="number">100</span>;</span><br><span class="line">            num += (*(text+<span class="number">1</span>) - <span class="string">&#x27;0&#x27;</span>) * <span class="number">10</span>;</span><br><span class="line">            num += *(text+<span class="number">2</span>) - <span class="string">&#x27;0&#x27;</span> ;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            num += (*(text+<span class="number">0</span>) - <span class="string">&#x27;0&#x27;</span>) * <span class="number">10</span>;</span><br><span class="line">            num += *(text+<span class="number">1</span>) - <span class="string">&#x27;0&#x27;</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">static</span> <span class="type">lv_coord_t</span> ui_Water_Chart_series_1_array_second[] = &#123; <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span> &#125;;</span><br><span class="line">        <span class="keyword">if</span>(updata_num &lt; <span class="number">9</span>)&#123;</span><br><span class="line">            ui_Water_Chart_series_1_array_second[updata_num] = num;</span><br><span class="line">            water_num_all += num;</span><br><span class="line">            time_num = water_time_long;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            updata_num = <span class="number">1</span>;</span><br><span class="line">            water_num_all = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        lv_label_set_text_fmt(ui_water_all, <span class="string">&quot;今日饮水总量：%dml&quot;</span>, water_num_all);</span><br><span class="line">        lv_chart_set_ext_y_array(ui_Water_Chart, ui_Water_Chart_series_1, ui_Water_Chart_series_1_array_second);</span><br><span class="line">        ESP_LOGI(TAG, <span class="string">&quot;饮水量4 %d&quot;</span>, num);</span><br><span class="line">        ESP_LOGI(TAG, <span class="string">&quot;饮水量5 %s&quot;</span>, text);</span><br><span class="line">        water_flag = <span class="number">0</span>;</span><br><span class="line">        updata_num++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">water_time</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int16_t</span> water_time_num = water_time_long - time_num;</span><br><span class="line">    lv_label_set_text_fmt(ui_water_time, <span class="string">&quot;距离上次饮水已过%d分钟&quot;</span>, water_time_num/<span class="number">60</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//////////////////////weather_if//////////////////</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">Weather_Init</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    ESP_LOGI(TAG, <span class="string">&quot;天气 %s&quot;</span>, my_text);</span><br><span class="line">    <span class="keyword">if</span>(Weather_Judge(my_text, <span class="string">&quot;晴&quot;</span>))&#123;</span><br><span class="line">        lv_obj_clear_flag(ui_sunday, LV_OBJ_FLAG_HIDDEN);</span><br><span class="line">        lv_obj_add_flag(ui_cloudy, LV_OBJ_FLAG_HIDDEN);</span><br><span class="line">        lv_obj_add_flag(ui_rain, LV_OBJ_FLAG_HIDDEN);</span><br><span class="line">        sunday_Animation(ui_sun, <span class="number">0</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(Weather_Judge(my_text, <span class="string">&quot;多云&quot;</span>))&#123;</span><br><span class="line">        lv_obj_clear_flag(ui_cloudy, LV_OBJ_FLAG_HIDDEN);</span><br><span class="line">        lv_obj_add_flag(ui_sunday, LV_OBJ_FLAG_HIDDEN);</span><br><span class="line">        lv_obj_add_flag(ui_rain, LV_OBJ_FLAG_HIDDEN);</span><br><span class="line">        cloud_Animation(ui_cloud1, <span class="number">0</span>);</span><br><span class="line">        cloud2_Animation(ui_cloud2, <span class="number">0</span>);</span><br><span class="line">        cloud_Animation(ui_cloud3, <span class="number">0</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(Weather_Judge(my_text, <span class="string">&quot;阴&quot;</span>))&#123;</span><br><span class="line">        lv_obj_clear_flag(ui_cloudy, LV_OBJ_FLAG_HIDDEN);</span><br><span class="line">        lv_obj_add_flag(ui_sun2, LV_OBJ_FLAG_HIDDEN);</span><br><span class="line">        lv_obj_add_flag(ui_sunday, LV_OBJ_FLAG_HIDDEN);</span><br><span class="line">        lv_obj_add_flag(ui_rain, LV_OBJ_FLAG_HIDDEN);</span><br><span class="line">        cloud_Animation(ui_cloud1, <span class="number">0</span>);</span><br><span class="line">        cloud2_Animation(ui_cloud2, <span class="number">0</span>);</span><br><span class="line">        cloud_Animation(ui_cloud3, <span class="number">0</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(Weather_Judge(my_text, <span class="string">&quot;雨&quot;</span>))&#123;</span><br><span class="line">        lv_obj_clear_flag(ui_rain, LV_OBJ_FLAG_HIDDEN);</span><br><span class="line">        lv_obj_add_flag(ui_sunday, LV_OBJ_FLAG_HIDDEN);</span><br><span class="line">        lv_obj_add_flag(ui_cloudy, LV_OBJ_FLAG_HIDDEN);</span><br><span class="line">        lv_obj_move_foreground(ui_temp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">Weather_Judge</span><span class="params">(<span class="type">char</span> my_text[], <span class="type">char</span> *search_word)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> i = <span class="number">0</span>, j = <span class="number">0</span>, flag = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (i &lt; <span class="built_in">strlen</span>(my_text) &amp;&amp; j &lt; <span class="built_in">strlen</span>(search_word) )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (*(my_text+i) == *(search_word+j))</span><br><span class="line">        &#123; </span><br><span class="line">            i++;</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            i = i - j + <span class="number">1</span>; </span><br><span class="line">            j = <span class="number">0</span>;         </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (j == <span class="built_in">strlen</span>(search_word))</span><br><span class="line">        &#123;             </span><br><span class="line">            flag = <span class="number">1</span>; </span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> flag;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//////////////////////wifi_call//////////////////</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">wifi_call</span><span class="params">(<span class="type">lv_event_t</span> *e)</span></span><br><span class="line">&#123;</span><br><span class="line">    http_rest_with_url();</span><br><span class="line">    lv_label_set_text_fmt(ui_temp, <span class="string">&quot;%d&quot;</span>, my_temp);</span><br><span class="line">    lv_label_set_text_fmt(ui_rh, <span class="string">&quot;%d&quot;</span>, my_rh);</span><br><span class="line">    lv_label_set_text_fmt(ui_wind_class, <span class="string">&quot;%s&quot;</span>, my_wind_class);</span><br><span class="line">    lv_label_set_text_fmt(ui_text, <span class="string">&quot;%s&quot;</span>, my_text);</span><br><span class="line">    lv_label_set_text_fmt(ui_name, <span class="string">&quot;%s&quot;</span>, my_name);</span><br><span class="line">    Weather_Init();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">////////////////////time_init///////////////////</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">timeval</span> <span class="title">tv</span> =</span> &#123;</span><br><span class="line">    .tv_sec = <span class="number">0</span>,</span><br><span class="line">    .tv_usec = <span class="number">0</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">tm</span>* <span class="title">timeinfo</span>;</span></span><br><span class="line"><span class="type">char</span> My_Clock_Flag=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">ui_clock_update</span><span class="params">(<span class="type">lv_timer_t</span> *timer)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">time_t</span> current_time = (<span class="type">time_t</span>)(time_long / <span class="number">1000</span> - My_Clock_Flag);</span><br><span class="line">    gettimeofday(&amp;tv, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">if</span>(My_Clock_Flag == <span class="number">0</span>)&#123;</span><br><span class="line">        current_time -= tv.tv_sec; </span><br><span class="line">        My_Clock_Flag = tv.tv_sec;</span><br><span class="line">    &#125;</span><br><span class="line">    tv.tv_sec += current_time;</span><br><span class="line">    water_time_long = tv.tv_sec;</span><br><span class="line">    setenv(<span class="string">&quot;TZ&quot;</span>, <span class="string">&quot;CST-8&quot;</span>, <span class="number">1</span>);</span><br><span class="line">    tzset();</span><br><span class="line">    timeinfo = localtime(&amp;tv.tv_sec);</span><br><span class="line">    </span><br><span class="line">    <span class="type">char</span> time_str[<span class="number">9</span>];</span><br><span class="line">    <span class="built_in">sprintf</span>(time_str, <span class="string">&quot;%02d:%02d:%02d&quot;</span>, timeinfo-&gt;tm_hour, timeinfo-&gt;tm_min, timeinfo-&gt;tm_sec);</span><br><span class="line"></span><br><span class="line">    <span class="type">char</span> date_str[<span class="number">20</span>]; <span class="comment">// 假设月份和日期都是两位数，加上斜杠和字符串结束符</span></span><br><span class="line">    <span class="built_in">sprintf</span>(date_str, <span class="string">&quot;%04d/%02d/%02d&quot;</span>, timeinfo-&gt;tm_year, timeinfo-&gt;tm_mon+<span class="number">1</span>, timeinfo-&gt;tm_mday);</span><br><span class="line"></span><br><span class="line">    lv_img_set_angle(ui_Sec, timeinfo-&gt;tm_sec * <span class="number">60</span>);</span><br><span class="line">    lv_img_set_angle(ui_Min, timeinfo-&gt;tm_min * <span class="number">60</span>);</span><br><span class="line">    lv_img_set_angle(ui_Hour, timeinfo-&gt;tm_hour * <span class="number">300</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    lv_label_set_text_fmt(ui_Clock_Number, <span class="string">&quot;%s&quot;</span>, time_str);</span><br><span class="line">    lv_label_set_text_fmt(ui_Date, <span class="string">&quot;%s&quot;</span>, date_str);</span><br><span class="line">    water_time();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">ui_time_init</span><span class="params">()</span></span><br><span class="line">&#123;  </span><br><span class="line">    <span class="type">lv_timer_t</span> *time_clock = lv_timer_create(ui_clock_update, <span class="number">1000</span>, <span class="literal">NULL</span>);</span><br><span class="line">    ui_clock_update(time_clock);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//在ui.h的19添加以下代码</span></span><br><span class="line"><span class="comment">//-------</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span>  </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;esp_log.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">wodder_add</span><span class="params">(<span class="type">lv_event_t</span> *e)</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">water_call</span><span class="params">(<span class="type">lv_event_t</span> *e)</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">water_time</span><span class="params">()</span>;</span><br><span class="line"><span class="keyword">extern</span> <span class="type">void</span> <span class="title function_">http_rest_with_url</span><span class="params">()</span>;</span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> my_temp;</span><br><span class="line"><span class="keyword">extern</span> <span class="type">char</span> my_name[<span class="number">10</span>];</span><br><span class="line"><span class="keyword">extern</span> <span class="type">char</span> my_text[<span class="number">6</span>];</span><br><span class="line"><span class="keyword">extern</span> <span class="type">char</span> my_wind_class[<span class="number">6</span>];</span><br><span class="line"><span class="keyword">extern</span> <span class="type">int</span> my_rh;</span><br><span class="line"><span class="keyword">extern</span> <span class="type">char</span> *clock_timer;</span><br><span class="line"><span class="keyword">extern</span> <span class="type">char</span> *TAG;</span><br><span class="line"><span class="keyword">extern</span> <span class="type">long</span> <span class="type">long</span> time_long;</span><br><span class="line"><span class="keyword">extern</span> <span class="type">lv_chart_series_t</span> * ui_Water_Chart_series_1;</span><br><span class="line"><span class="comment">//extern lv_coord_t ui_Water_Chart_series_1_array[];</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">ui_time_init</span><span class="params">()</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">ui_clock_update</span><span class="params">(<span class="type">lv_timer_t</span> *timer)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">Weather_Judge</span><span class="params">(<span class="type">char</span> my_text[], <span class="type">char</span> *search_word)</span>;</span><br><span class="line"><span class="type">void</span> <span class="title function_">Weather_Init</span><span class="params">()</span>;</span><br><span class="line"><span class="comment">//-----</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line">lv_obj_add_flag(ui_Label5, LV_OBJ_FLAG_HIDDEN);<span class="comment">//隐藏对象</span></span><br><span class="line"></span><br><span class="line"> lv_obj_clear_flag(user_obj, LV_OBJ_FLAG_HIDDEN);<span class="comment">//取消隐藏</span></span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <tags>
         <tag>ESP-S3</tag>
